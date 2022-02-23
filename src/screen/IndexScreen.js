@@ -20,22 +20,27 @@ const IndexScreen = ({ navigation }) => {
 
     return (
         <View>
-            <FlatList
-                data={state}
-                keyExtractor={(value) => value.id}
-                renderItem={({ item }) => {
-                    return (
-                        <TouchableOpacity onPress={() => navigation.navigate('Blog', { id: item.id })}>
-                            <View style={styles.row}>
-                                <Text style={styles.item}>{item.title} - {item.id} </Text>
-                                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                                    <Feather style={styles.icon} name='trash-2' />
-                                </TouchableOpacity>
-                            </View>
-                        </TouchableOpacity>
-                    )
-                }}
-            />
+            {state.length === 0 ?
+                <View style={{justifyContent:'center',marginTop:250}}>
+                    <Text style={styles.msg} >No Blog Right Now!</Text>
+                    <Text style={styles.msg} >Tap on the <Feather style={{color:'black'}} name='plus' size={30} /> to Create Some.!</Text>
+                </View> :
+                <FlatList
+                    data={state}
+                    keyExtractor={(value) => value.id}
+                    renderItem={({ item }) => {
+                        return (
+                            <TouchableOpacity onPress={() => navigation.navigate('Blog', { id: item.id })}>
+                                <View style={styles.row}>
+                                    <Text style={styles.item}>{item.title} - {item.id} </Text>
+                                    <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                                        <Feather style={styles.icon} name='trash-2' />
+                                    </TouchableOpacity>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                />}
         </View>
     )
 }
@@ -59,7 +64,13 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginBottom: 20
+    },
+    msg: {
+        fontSize: 20,
+        alignSelf: 'center',
+        // marginVertical: 300,
     }
+
 })
 
 export default IndexScreen
