@@ -1,0 +1,58 @@
+import React, { useContext, useState } from 'react'
+import { View, StyleSheet, Text, Button, TextInput } from 'react-native'
+import { Context } from '../Components/Context/BlogContext'
+
+const EditScreen = ({ nevigation, route }) => {
+    const id = route.params.id
+    const { state } = useContext(Context)
+    const blogPost = state.find(() => state.id === id)
+    console.log(blogPost)
+
+    const [title, setTitle] = useState(blogPost.title)
+    const [content, setContent] = useState(blogPost.content)
+
+
+    return (
+        <View>
+            <Text style={{margin:10,alignSelf:'center',fontSize:18,fontWeight:"bold"}}>Edit Screen</Text>
+            <Text style={styles.title}>Edit Title</Text>
+            <TextInput
+                style={styles.input}
+                value={title}
+                onChangeText={(newTitle) => setTitle(newTitle)}
+            />
+            <Text style={styles.title}>Edit Context</Text>
+            <TextInput 
+                style={styles.input}
+                value={content}
+                onChangeText={(newContent) => setContent(newContent)}
+                multiline={true}
+            />
+            <View style={styles.btn}>
+            <Button
+                title='Update Post'
+            />
+            </View>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    title:{
+        fontSize:18,
+        fontWeight:'bold',
+        marginHorizontal:5,
+        margin:5,
+    },
+    input:{
+        borderWidth:1,
+        padding:3,
+        marginHorizontal:5
+    },
+    btn:{
+        marginTop:10,
+        marginHorizontal:5,
+    }
+})
+
+export default EditScreen
