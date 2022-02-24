@@ -11,33 +11,45 @@ const ShowScreen = ({ route, navigation }) => {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => ( // Smart return
-                    <TouchableOpacity onPress={() => navigation.navigate('Edit',{id})}>
-                        <EvilIcons name="pencil" size={35} />
-                    </TouchableOpacity>
-                )
+                <TouchableOpacity onPress={() => navigation.navigate('Edit', { id })}>
+                    <EvilIcons name="pencil" size={35} />
+                </TouchableOpacity>
+            )
         })
 
     }, [navigation])
 
     return (
-        <View style={styles.frame}>
-            <Text style={styles.title} >Title : {blogPost.title}</Text>
-            <Text style={styles.content} >Content: {blogPost.content}</Text>
-        </View>
+        <>
+            <Text style={[styles.title, { alignSelf: 'center' }]} >
+                The Blog Post - {id}
+            </Text>
+            <View style={styles.frame}>
+                <Text style={styles.title} >{blogPost.title}</Text>
+                <Text style={styles.title}>Blog Post.</Text>
+                <Text style={styles.content} >{blogPost.content}</Text>
+            </View>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
+    frame: {
+        borderWidth: 1,
+        margin: 5,
+        borderRadius: 5,
+        paddingBottom: 10,
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginHorizontal: 3,
+        marginHorizontal: 5,
         marginTop: 10,
     },
     content: {
-        marginTop: 20,
+        marginTop: 5,
         borderWidth: 1,
-        marginHorizontal: 3,
+        marginHorizontal: 5,
         padding: 5,
         fontSize: 15,
         borderRadius: 5,
